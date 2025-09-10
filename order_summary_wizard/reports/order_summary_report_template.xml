@@ -1,0 +1,82 @@
+<odoo>
+    <template id="order_summary_report_template">
+        <t t-call="web.html_container">
+            <!-- Inline CSS for Styling -->
+            <style type="text/css">
+                /* Full-width and height container for the table */
+                .table-container {
+                    width: 100%;
+                    height: calc(100vh - 150px); /* Dynamically adjust height based on available space */
+                    display: flex;
+                    flex-direction: column;
+                    overflow-y: auto;
+                }
+
+                /* Responsive and full-width tree table */
+                .tree-table {
+                    width: 100%;
+                    table-layout: fixed; /* Ensures columns have equal widths */
+                    border-collapse: collapse;
+                }
+
+                .tree-table th, .tree-table td {
+                    border: 1px solid #ddd;
+                    padding: 12px; /* Better spacing for cells */
+                    text-align: center;
+                    word-wrap: break-word; /* Prevent text overflow */
+                    font-size: 14px;
+                }
+
+                .tree-table th {
+                    background-color: #f4f4f4;
+                    font-weight: bold;
+                }
+
+                /* Align Product Name to the left */
+                .tree-table td:first-child {
+                    text-align: left; /* Align text to the left for Product Name column */
+                }
+
+                /* Responsive adjustments for smaller screens */
+                @media (max-width: 768px) {
+                    .table-container {
+                        height: calc(100vh - 200px); /* Adjust height for smaller screens */
+                    }
+                    .tree-table th, .tree-table td {
+                        padding: 8px; /* Reduce padding */
+                        font-size: 12px; /* Adjust font size */
+                    }
+                }
+            </style>
+
+            <!-- Report Content -->
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>Order Summary Report - Koral</h2>
+                    <div class="table-container">
+                        <table class="tree-table">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>On Hand</th>
+                                    <th>Variance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.product_summary_ids" t-as="line">
+                                    <tr>
+                                        <td><t t-esc="line.product_id.name"/></td>
+                                        <td><t t-esc="line.quantity"/></td>
+                                        <td><t t-esc="line.on_hand"/></td>
+                                        <td><t t-esc="line.variance"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

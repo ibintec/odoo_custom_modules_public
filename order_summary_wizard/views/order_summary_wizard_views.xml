@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <!-- Wizard Form View -->
+        <record id="view_order_summary_wizard_form" model="ir.ui.view">
+            <field name="name">order.summary.wizard.form</field>
+            <field name="model">order.summary.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Order Summary">
+                    <header>
+                        <button name="action_print" string="Print" type="object" class="btn-primary"/>
+                        <button name="action_export_excel" string="Export to Excel" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </header>
+                    <sheet>
+                        <div class="table-container">
+                            <field name="product_summary_ids" nolabel="1" readonly="1">
+                                <tree class="tree-table" create="false" edit="false">
+                                    <field name="product_id" string="Product Name"/>
+                                    <field name="quantity" string="Quantity"/>
+                                    <field name="on_hand" string="On Hand"/>
+                                    <field name="variance" string="Variance"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Wizard Action -->
+        <record id="action_order_summary_wizard" model="ir.actions.act_window">
+            <field name="name">Order Summary</field>
+            <field name="res_model">order.summary.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_order_summary_wizard_form" />
+            <field name="target">new</field>
+            <field name="context">{'active_ids': active_ids}</field>
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+        </record>
+    </data>
+</odoo>

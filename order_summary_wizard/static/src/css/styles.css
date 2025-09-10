@@ -1,0 +1,41 @@
+<style>
+/* Full-width and height container for the table */
+.table-container {
+    width: 100%;
+    height: calc(100vh - 150px); /* Dynamically adjust height based on available space */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Responsive and full-width tree table */
+.tree-table {
+    width: 100%;
+    table-layout: fixed; /* Ensures columns have equal widths */
+    border-collapse: collapse;
+}
+
+.tree-table th, .tree-table td {
+    border: 1px solid #ddd;
+    padding: 12px; /* Better spacing for cells */
+    text-align: center;
+    word-wrap: break-word; /* Prevent text overflow */
+    font-size: 14px;
+}
+
+.tree-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .table-container {
+        height: calc(100vh - 200px); /* Adjust height for smaller screens */
+    }
+    .tree-table th, .tree-table td {
+        padding: 8px; /* Reduce padding */
+        font-size: 12px; /* Adjust font size */
+    }
+}
+</style>
